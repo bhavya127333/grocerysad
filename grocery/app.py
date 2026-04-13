@@ -18,7 +18,7 @@ AWS_REGION = os.getenv("AWS_REGION", "eu-north-1")
 PRODUCTS_TABLE_NAME = os.getenv("PRODUCTS_TABLE_NAME", "Products")
 ORDERS_TABLE_NAME = os.getenv("ORDERS_TABLE_NAME", "Orders")
 USERS_TABLE_NAME = os.getenv("USERS_TABLE_NAME", "Users")
-SNS_TOPIC_ARN = os.getenv("SNS_TOPIC_ARN", "")
+SNS_TOPIC_ARN = os.getenv("SNS_TOPIC_ARN", "arn:aws:sns:ap-south-1:367553824826:grocery-order")
 
 def get_dynamodb_resource():
     # Boto3 automatically uses the IAM role attached to your EC2 instance
