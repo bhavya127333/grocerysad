@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Grocery - Dairy</title>
+  <style>
+    /* Global & Topbar */
+    :root { --primary: #10b981; --primary-light: #34d399; --bg-color: #f9fafb; --text-color: #1f2937; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-color); }
+    a { text-decoration: none; }
+    .hidden { display: none !important; }
+    .dairy-topbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    .dairy-brand { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+    .dairy-nav-links a { margin: 0 1rem; color: var(--text-color); font-weight: 500; }
+    .dairy-nav-links a.active, .dairy-nav-links a:hover { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 0.25rem; }
+    .dairy-logout-btn { padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; }
+
+    /* Hero */
+    .dairy-hero { background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&w=1200&q=80') center/cover; padding: 4rem 5%; text-align: center; color: white; }
+    .dairy-chip { background: #3b82f6; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: bold; }
+    .dairy-hero h1 { font-size: 2.5rem; margin: 1rem 0; }
+    .dairy-hero p { max-width: 600px; margin: 0 auto; font-size: 1.1rem; line-height: 1.5; }
+
+    /* Main Sections */
+    .dairy-main { padding: 3rem 5%; }
+    .dairy-intro-card { background: white; padding: 2rem; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .dairy-intro-left h2 { margin-bottom: 1rem; color: #2563eb; }
+    .dairy-intro-right { display: flex; gap: 1rem; }
+    .dairy-mini-box { background: var(--bg-color); padding: 1rem; border-radius: 8px; flex: 1; border-left: 4px solid #3b82f6; }
+
+    /* Products Area */
+    .dairy-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .dairy-search-wrap input { padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 20px; width: 300px; outline: none; }
+    .dairy-search-wrap input:focus { border-color: var(--primary); }
+    
+    .dairy-product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+    /* Product card */
+    .product-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; padding-bottom: 1rem; }
+    .product-card img { width: 100%; height: 180px; object-fit: cover; }
+    .product-card h3 { margin: 1rem 0 0.5rem; }
+    .product-card .price { color: var(--primary); font-weight: bold; font-size: 1.2rem; }
+    .product-card button { margin-top: 1rem; background: var(--primary); color: white; border: none; padding: 0.5rem 1.5rem; border-radius: 6px; cursor: pointer; transition: background 0.3s; }
+    .product-card button:hover { background: #059669; }
+
+    .dairy-footer { text-align: center; padding: 2rem; background: white; border-top: 1px solid #e5e7eb; color: #6b7280; }
+
+    @media(max-width: 768px) {
+      .dairy-intro-card { grid-template-columns: 1fr; }
+      .dairy-nav-links { display: none; }
+    }
+  </style>
+</head>
+<body class="dairy-page-only">
+  <header class="dairy-topbar">
+    <div class="dairy-brand">Fresh Grocery</div>
+    <nav class="dairy-nav-links">
+      <a href="/">Home</a>
+      <a href="/fruits">Fruits</a>
+      <a href="/vegetables">Vegetables</a>
+      <a href="/dairy" class="active">Dairy</a>
+      <a href="/grains">Grains</a>
+      <a href="/cart">Cart</a>
+      <a href="/confirmation">Confirmation</a>
+    </nav>
+    <div class="dairy-topbar-right">
+      <span id="welcome-text"></span>
+      <button id="logout-btn" class="dairy-logout-btn hidden" type="button">Logout</button>
+    </div>
+  </header>
+
+  <section class="dairy-hero">
+    <div class="dairy-hero-overlay">
+      <div class="dairy-hero-content">
+        <span class="dairy-chip">Pure • Fresh • Daily</span>
+        <h1>Premium Dairy Collection</h1>
+        <p>Shop milk and dairy essentials in a clean and professional product layout.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="dairy-main">
+    <section class="dairy-intro-card">
+      <div class="dairy-intro-left">
+        <h2>Dairy Essentials for Everyday Use</h2>
+        <p>Explore milk and dairy products in a focused page with better structure and easier shopping.</p>
+      </div>
+      <div class="dairy-intro-right">
+        <div class="dairy-mini-box">
+          <h3>Clean layout</h3>
+          <p>Focused category view with easier browsing and quicker actions.</p>
+        </div>
+        <div class="dairy-mini-box">
+          <h3>Neat cards</h3>
+          <p>Premium product cards with better spacing and visual structure.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dairy-products-section">
+      <div class="dairy-section-header">
+        <div>
+          <h2>Dairy Products</h2>
+          <p>Search and add dairy essentials to your cart.</p>
+        </div>
+        <div class="dairy-search-wrap">
+          <input type="text" id="search-input" placeholder="Search dairy..." />
+        </div>
+      </div>
+      <div id="product-list" class="dairy-product-list"></div>
+    </section>
+  </main>
+
+  <footer class="dairy-footer">
+    <p>Fresh Grocery Delivery App</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+  <script>if(typeof fetchProducts === 'function') fetchProducts("Dairy");</script>
+</body>
+</html>

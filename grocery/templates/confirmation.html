@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Grocery - Confirmation</title>
+  <style>
+    /* Global & Topbar */
+    :root { --primary: #10b981; --bg-color: #f9fafb; --text-color: #1f2937; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-color); }
+    a { text-decoration: none; }
+    .hidden { display: none !important; }
+    .confirmation-topbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    .confirmation-brand { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+    .confirmation-nav-links a { margin: 0 1rem; color: var(--text-color); font-weight: 500; }
+    .confirmation-nav-links a.active, .confirmation-nav-links a:hover { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 0.25rem; }
+    .confirmation-logout-btn { padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; }
+
+    /* Hero */
+    .confirmation-hero { background: #064e3b; padding: 4rem 5%; text-align: center; color: white; }
+    .confirmation-chip { background: var(--primary); padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: bold; display: inline-block; margin-bottom: 1rem; }
+    .confirmation-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+    /* Layout */
+    .confirmation-main { padding: 3rem 5%; max-width: 900px; margin: 0 auto; }
+    .confirmation-details-box { background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 2rem; border-top: 4px solid var(--primary); }
+    .confirmation-details-box h2 { color: var(--primary); margin-bottom: 1rem; }
+    .confirmation-details-box p { margin-bottom: 0.5rem; font-size: 1.1rem; }
+
+    .confirmation-next-box { background: #ecfdf5; padding: 2rem; border-radius: 12px; text-align: center; border: 1px solid #d1fae5; }
+    .confirmation-next-box h2 { color: #065f46; margin-bottom: 1rem; }
+    .confirmation-actions { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .confirmation-btn { padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: bold; background: white; color: var(--primary); border: 2px solid var(--primary); transition: all 0.3s; }
+    .confirmation-btn:hover { background: var(--primary); color: white; }
+
+    .confirmation-footer { text-align: center; padding: 2rem; background: white; border-top: 1px solid #e5e7eb; color: #6b7280; }
+
+    @media(max-width: 768px) {
+      .confirmation-nav-links { display: none; }
+    }
+  </style>
+</head>
+<body class="confirmation-page-only">
+  <header class="confirmation-topbar">
+    <div class="confirmation-brand">Fresh Grocery</div>
+    <nav class="confirmation-nav-links">
+      <a href="/">Home</a>
+      <a href="/fruits">Fruits</a>
+      <a href="/vegetables">Vegetables</a>
+      <a href="/dairy">Dairy</a>
+      <a href="/grains">Grains</a>
+      <a href="/cart">Cart</a>
+      <a href="/confirmation" class="active">Confirmation</a>
+    </nav>
+    <div class="confirmation-topbar-right">
+      <span id="welcome-text"></span>
+      <button id="logout-btn" class="confirmation-logout-btn hidden" type="button">Logout</button>
+    </div>
+  </header>
+
+  <section class="confirmation-hero">
+    <div class="confirmation-hero-overlay">
+      <div class="confirmation-hero-content">
+        <span class="confirmation-chip">Success • Confirmed • Ready</span>
+        <h1>Order Confirmation</h1>
+        <p>Your placed order appears here in a neat and professional confirmation layout.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="confirmation-main">
+    <section class="confirmation-layout-wrap">
+      <div id="confirmation-box" class="confirmation-details-box">
+        <!-- JS injects order success details here -->
+        <h2>Status Pending...</h2>
+        <p>If you just placed an order, details will appear here.</p>
+      </div>
+
+      <div class="confirmation-next-box">
+        <h2>Next Steps</h2>
+        <p>Your order has been placed successfully. Continue shopping or review your cart again.</p>
+
+        <div class="confirmation-actions">
+          <a href="/fruits" class="confirmation-btn">Shop Fruits</a>
+          <a href="/vegetables" class="confirmation-btn">Shop Vegetables</a>
+          <a href="/cart" class="confirmation-btn">Go to Cart</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="confirmation-footer">
+    <p>Fresh Grocery Delivery App</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+  <script>
+    // Placeholder function if app.js handles confirmation UI logic.
+    if(typeof showConfirmation === 'function') showConfirmation();
+  </script>
+</body>
+</html>

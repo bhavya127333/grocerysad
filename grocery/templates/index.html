@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Grocery Home</title>
+  <style>
+    /* Global Styles */
+    :root {
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --bg-color: #f9fafb;
+      --text-color: #1f2937;
+      --light-text: #6b7280;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-color); }
+    a { text-decoration: none; }
+    .hidden { display: none !important; }
+
+    /* Topbar Navigation */
+    .home-topbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    .home-brand { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+    .home-nav-links a { margin: 0 1rem; color: var(--text-color); font-weight: 500; transition: color 0.3s; }
+    .home-nav-links a:hover, .home-nav-links a.active { color: var(--primary); }
+    .home-topbar-right button { padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; }
+
+    /* Hero Section */
+    .home-hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80') center/cover; padding: 6rem 5%; text-align: center; color: white; }
+    .home-hero-chip { background: var(--primary); padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: bold; }
+    .home-hero h1 { font-size: 3rem; margin: 1rem 0; }
+    .home-hero p { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem; line-height: 1.6; }
+    .home-hero-btns a { padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: bold; margin: 0 0.5rem; display: inline-block; }
+    .home-primary-link { background: var(--primary); color: white; }
+    .home-secondary-link { background: white; color: var(--text-color); }
+
+    /* Main Content */
+    .home-main { padding: 4rem 5%; }
+    .home-auth-section { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+    .home-left-panel h2 { font-size: 2rem; margin-bottom: 1rem; }
+    .home-feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+    .home-feature-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-top: 4px solid var(--primary); }
+
+    /* Forms */
+    .home-right-panel { background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .home-auth-tabs { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+    .home-auth-tabs button { flex: 1; padding: 0.75rem; background: #e5e7eb; border: none; font-weight: bold; cursor: pointer; border-radius: 6px; }
+    .home-auth-tabs button.active { background: var(--primary); color: white; }
+    .home-form-group { margin-bottom: 1.25rem; }
+    .home-form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+    .home-form-group input { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; }
+    .home-primary-btn { width: 100%; padding: 0.75rem; background: var(--primary); color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+
+    /* Categories Grid */
+    .home-section-title { text-align: center; margin-bottom: 2.5rem; }
+    .home-category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+    .home-category-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .home-category-card:hover { transform: translateY(-5px); }
+    .home-category-card img { width: 100%; height: 200px; object-fit: cover; background: #e5e7eb; }
+    .home-category-content { padding: 1.5rem; text-align: center; }
+    .home-category-content h3 { margin-bottom: 0.5rem; }
+    .home-card-btn { display: inline-block; margin-top: 1rem; color: var(--primary); font-weight: bold; }
+
+    .home-footer { text-align: center; padding: 2rem; background: white; border-top: 1px solid #e5e7eb; color: var(--light-text); }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      .home-auth-section { grid-template-columns: 1fr; gap: 2rem; }
+      .home-nav-links { display: none; }
+    }
+  </style>
+</head>
+<body class="page-home-only">
+  <header class="home-topbar">
+    <div class="home-brand">Fresh Grocery</div>
+
+    <nav class="home-nav-links">
+      <a href="/" class="active">Home</a>
+      <a href="/fruits">Fruits</a>
+      <a href="/vegetables">Vegetables</a>
+      <a href="/dairy">Dairy</a>
+      <a href="/grains">Grains</a>
+      <a href="/cart">Cart</a>
+      <a href="/confirmation">Confirmation</a>
+    </nav>
+
+    <div class="home-topbar-right">
+      <span id="welcome-text"></span>
+      <button id="logout-btn" class="home-logout-btn hidden" type="button">Logout</button>
+    </div>
+  </header>
+
+  <section class="home-hero">
+    <div class="home-hero-overlay">
+      <div class="home-hero-box">
+        <span class="home-hero-chip">Fresh • Fast • Reliable</span>
+        <h1>Fresh Groceries Delivered to Your Doorstep</h1>
+        <p>
+          Shop premium fruits, vegetables, dairy and grains with a clean,
+          elegant and smooth grocery shopping experience.
+        </p>
+        <div class="home-hero-btns">
+          <a href="/fruits" class="home-primary-link">Start Shopping</a>
+          <a href="/cart" class="home-secondary-link">View Cart</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="home-main">
+    <section class="home-auth-section">
+      <div class="home-left-panel">
+        <h2>Welcome to Fresh Grocery</h2>
+        <p>Enjoy category-based shopping, dedicated product pages, an easy cart flow, and a smoother checkout experience.</p>
+        
+        <div class="home-feature-grid">
+          <div class="home-feature-card">
+            <h3>Fresh Products</h3>
+            <p>Daily grocery essentials arranged clearly for easy shopping.</p>
+          </div>
+          <div class="home-feature-card">
+            <h3>Simple Checkout</h3>
+            <p>Move from browsing to cart and confirmation without confusion.</p>
+          </div>
+          <div class="home-feature-card">
+            <h3>Professional Design</h3>
+            <p>Premium home page with better spacing and cleaner sections.</p>
+          </div>
+          <div class="home-feature-card">
+            <h3>Fast Access</h3>
+            <p>Jump directly into fruits, vegetables, dairy or grains pages.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-right-panel">
+        <div class="home-auth-header" style="margin-bottom:1.5rem;">
+          <h2>Account Access</h2>
+          <p>Login or create your account to continue shopping.</p>
+        </div>
+
+        <div class="home-auth-tabs">
+          <button id="show-login" class="active" type="button">Login</button>
+          <button id="show-register" type="button">Register</button>
+        </div>
+
+        <form id="login-form" class="home-auth-form">
+          <h3 style="margin-bottom:1rem;">Login</h3>
+          <div class="home-form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="Enter your email" required />
+          </div>
+          <div class="home-form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" placeholder="Enter your password" required />
+          </div>
+          <button type="submit" class="home-primary-btn">Login</button>
+        </form>
+
+        <form id="register-form" class="home-auth-form hidden">
+          <h3 style="margin-bottom:1rem;">Create Account</h3>
+          <div class="home-form-group">
+            <label for="register-name">Full Name</label>
+            <input type="text" id="register-name" placeholder="Enter your full name" required />
+          </div>
+          <div class="home-form-group">
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" placeholder="Enter your email" required />
+          </div>
+          <div class="home-form-group">
+            <label for="register-phone">Phone Number</label>
+            <input type="text" id="register-phone" placeholder="Enter your 10-digit phone number" required />
+          </div>
+          <div class="home-form-group">
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" placeholder="Create your password" required />
+          </div>
+          <button type="submit" class="home-primary-btn">Create Account</button>
+        </form>
+        <div id="auth-message" class="home-message-box" style="margin-top:1rem; color:red;"></div>
+        <div id="logged-user" class="home-logged-user hidden" style="margin-top:1rem; font-weight:bold;"></div>
+      </div>
+    </section>
+
+    <section class="home-category-section">
+      <div class="home-section-title">
+        <h2>Shop by Category</h2>
+        <p>Choose what you need and continue shopping with a better experience.</p>
+      </div>
+
+      <div class="home-category-grid">
+        <div class="home-category-card">
+          <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=500&q=80" alt="Fruits" />
+          <div class="home-category-content">
+            <h3>Fruits</h3>
+            <p>Fresh apples, bananas and fruit essentials.</p>
+            <a href="/fruits" class="home-card-btn">Explore Fruits</a>
+          </div>
+        </div>
+        <div class="home-category-card">
+          <img src="https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?auto=format&fit=crop&w=500&q=80" alt="Vegetables" />
+          <div class="home-category-content">
+            <h3>Vegetables</h3>
+            <p>Green, fresh and daily cooking vegetables.</p>
+            <a href="/vegetables" class="home-card-btn">Explore Vegetables</a>
+          </div>
+        </div>
+        <div class="home-category-card">
+          <img src="https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&w=500&q=80" alt="Dairy" />
+          <div class="home-category-content">
+            <h3>Dairy</h3>
+            <p>Milk and dairy products for everyday use.</p>
+            <a href="/dairy" class="home-card-btn">Explore Dairy</a>
+          </div>
+        </div>
+        <div class="home-category-card">
+          <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=500&q=80" alt="Grains" />
+          <div class="home-category-content">
+            <h3>Grains</h3>
+            <p>Rice, bread and grain essentials in one place.</p>
+            <a href="/grains" class="home-card-btn">Explore Grains</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="home-footer">
+    <p>Fresh Grocery Delivery App</p>
+  </footer>
+
+  <!-- Make sure app.js is in your /static folder -->
+  <script src="/static/app.js"></script>
+</body>
+</html>

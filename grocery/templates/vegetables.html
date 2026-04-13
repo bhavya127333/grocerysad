@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Grocery - Vegetables</title>
+  <style>
+    /* Global & Topbar */
+    :root { --primary: #10b981; --bg-color: #f9fafb; --text-color: #1f2937; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-color); }
+    a { text-decoration: none; }
+    .hidden { display: none !important; }
+    .vegetables-topbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    .vegetables-brand { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+    .vegetables-nav-links a { margin: 0 1rem; color: var(--text-color); font-weight: 500; }
+    .vegetables-nav-links a.active, .vegetables-nav-links a:hover { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 0.25rem; }
+    .vegetables-logout-btn { padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; }
+
+    /* Hero */
+    .vegetables-hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?auto=format&fit=crop&w=1200&q=80') center/cover; padding: 4rem 5%; text-align: center; color: white; }
+    .vegetables-chip { background: #10b981; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: bold; }
+    .vegetables-hero h1 { font-size: 2.5rem; margin: 1rem 0; }
+    .vegetables-hero p { max-width: 600px; margin: 0 auto; font-size: 1.1rem; line-height: 1.5; }
+
+    /* Main Sections */
+    .vegetables-main { padding: 3rem 5%; }
+    .vegetables-intro-card { background: white; padding: 2rem; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .vegetables-intro-left h2 { margin-bottom: 1rem; color: #059669; }
+    .vegetables-intro-right { display: flex; gap: 1rem; }
+    .vegetables-mini-box { background: var(--bg-color); padding: 1rem; border-radius: 8px; flex: 1; border-left: 4px solid #059669; }
+
+    /* Products Area */
+    .vegetables-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .vegetables-search-wrap input { padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 20px; width: 300px; outline: none; }
+    .vegetables-search-wrap input:focus { border-color: var(--primary); }
+    
+    .vegetables-product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+    /* Product card generic styles */
+    .product-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; padding-bottom: 1rem; }
+    .product-card img { width: 100%; height: 180px; object-fit: cover; }
+    .product-card h3 { margin: 1rem 0 0.5rem; }
+    .product-card .price { color: var(--primary); font-weight: bold; font-size: 1.2rem; }
+    .product-card button { margin-top: 1rem; background: var(--primary); color: white; border: none; padding: 0.5rem 1.5rem; border-radius: 6px; cursor: pointer; transition: background 0.3s; }
+    .product-card button:hover { background: #059669; }
+
+    .vegetables-footer { text-align: center; padding: 2rem; background: white; border-top: 1px solid #e5e7eb; color: #6b7280; }
+
+    @media(max-width: 768px) {
+      .vegetables-intro-card { grid-template-columns: 1fr; }
+      .vegetables-nav-links { display: none; }
+    }
+  </style>
+</head>
+<body class="vegetables-page-only">
+  <header class="vegetables-topbar">
+    <div class="vegetables-brand">Fresh Grocery</div>
+    <nav class="vegetables-nav-links">
+      <a href="/">Home</a>
+      <a href="/fruits">Fruits</a>
+      <a href="/vegetables" class="active">Vegetables</a>
+      <a href="/dairy">Dairy</a>
+      <a href="/grains">Grains</a>
+      <a href="/cart">Cart</a>
+      <a href="/confirmation">Confirmation</a>
+    </nav>
+    <div class="vegetables-topbar-right">
+      <span id="welcome-text"></span>
+      <button id="logout-btn" class="vegetables-logout-btn hidden" type="button">Logout</button>
+    </div>
+  </header>
+
+  <section class="vegetables-hero">
+    <div class="vegetables-hero-overlay">
+      <div class="vegetables-hero-content">
+        <span class="vegetables-chip">Fresh • Green • Healthy</span>
+        <h1>Premium Vegetables Collection</h1>
+        <p>Browse farm-fresh vegetables in a clean and professional shopping layout.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="vegetables-main">
+    <section class="vegetables-intro-card">
+      <div class="vegetables-intro-left">
+        <h2>Healthy Vegetables for Everyday Cooking</h2>
+        <p>Explore fresh vegetables with a better page layout, focused browsing and cleaner product cards.</p>
+      </div>
+      <div class="vegetables-intro-right">
+        <div class="vegetables-mini-box">
+          <h3>Better browsing</h3>
+          <p>Focused page experience with less clutter and quicker actions.</p>
+        </div>
+        <div class="vegetables-mini-box">
+          <h3>Neat display</h3>
+          <p>Balanced design, better spacing and premium product cards.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="vegetables-products-section">
+      <div class="vegetables-section-header">
+        <div>
+          <h2>Vegetables Products</h2>
+          <p>Search and add your favorite vegetables to cart.</p>
+        </div>
+        <div class="vegetables-search-wrap">
+          <input type="text" id="search-input" placeholder="Search vegetables..." />
+        </div>
+      </div>
+      <div id="product-list" class="vegetables-product-list"></div>
+    </section>
+  </main>
+
+  <footer class="vegetables-footer">
+    <p>Fresh Grocery Delivery App</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+  <script>if(typeof fetchProducts === 'function') fetchProducts("Vegetables");</script>
+</body>
+</html>

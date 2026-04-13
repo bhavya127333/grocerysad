@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Grocery - Grains</title>
+  <style>
+    /* Global & Topbar */
+    :root { --primary: #10b981; --bg-color: #f9fafb; --text-color: #1f2937; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-color); }
+    a { text-decoration: none; }
+    .hidden { display: none !important; }
+    .grains-topbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    .grains-brand { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+    .grains-nav-links a { margin: 0 1rem; color: var(--text-color); font-weight: 500; }
+    .grains-nav-links a.active, .grains-nav-links a:hover { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 0.25rem; }
+    .grains-logout-btn { padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; }
+
+    /* Hero */
+    .grains-hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=1200&q=80') center/cover; padding: 4rem 5%; text-align: center; color: white; }
+    .grains-chip { background: #8b5cf6; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: bold; }
+    .grains-hero h1 { font-size: 2.5rem; margin: 1rem 0; }
+    .grains-hero p { max-width: 600px; margin: 0 auto; font-size: 1.1rem; line-height: 1.5; }
+
+    /* Main Sections */
+    .grains-main { padding: 3rem 5%; }
+    .grains-intro-card { background: white; padding: 2rem; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .grains-intro-left h2 { margin-bottom: 1rem; color: #6d28d9; }
+    .grains-intro-right { display: flex; gap: 1rem; }
+    .grains-mini-box { background: var(--bg-color); padding: 1rem; border-radius: 8px; flex: 1; border-left: 4px solid #8b5cf6; }
+
+    /* Products Area */
+    .grains-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .grains-search-wrap input { padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 20px; width: 300px; outline: none; }
+    .grains-search-wrap input:focus { border-color: var(--primary); }
+    
+    .grains-product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+    /* Product card */
+    .product-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; padding-bottom: 1rem; }
+    .product-card img { width: 100%; height: 180px; object-fit: cover; }
+    .product-card h3 { margin: 1rem 0 0.5rem; }
+    .product-card .price { color: var(--primary); font-weight: bold; font-size: 1.2rem; }
+    .product-card button { margin-top: 1rem; background: var(--primary); color: white; border: none; padding: 0.5rem 1.5rem; border-radius: 6px; cursor: pointer; transition: background 0.3s; }
+    .product-card button:hover { background: #059669; }
+
+    .grains-footer { text-align: center; padding: 2rem; background: white; border-top: 1px solid #e5e7eb; color: #6b7280; }
+
+    @media(max-width: 768px) {
+      .grains-intro-card { grid-template-columns: 1fr; }
+      .grains-nav-links { display: none; }
+    }
+  </style>
+</head>
+<body class="grains-page-only">
+  <header class="grains-topbar">
+    <div class="grains-brand">Fresh Grocery</div>
+    <nav class="grains-nav-links">
+      <a href="/">Home</a>
+      <a href="/fruits">Fruits</a>
+      <a href="/vegetables">Vegetables</a>
+      <a href="/dairy">Dairy</a>
+      <a href="/grains" class="active">Grains</a>
+      <a href="/cart">Cart</a>
+      <a href="/confirmation">Confirmation</a>
+    </nav>
+    <div class="grains-topbar-right">
+      <span id="welcome-text"></span>
+      <button id="logout-btn" class="grains-logout-btn hidden" type="button">Logout</button>
+    </div>
+  </header>
+
+  <section class="grains-hero">
+    <div class="grains-hero-overlay">
+      <div class="grains-hero-content">
+        <span class="grains-chip">Staples • Daily • Essential</span>
+        <h1>Premium Grains Collection</h1>
+        <p>Browse rice, bread and staple products in a cleaner and more professional layout.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="grains-main">
+    <section class="grains-intro-card">
+      <div class="grains-intro-left">
+        <h2>Essential Grains for Every Home</h2>
+        <p>Shop grain and staple products with better structure, cleaner sections and premium product cards.</p>
+      </div>
+      <div class="grains-intro-right">
+        <div class="grains-mini-box">
+          <h3>Better layout</h3>
+          <p>Focused browsing, cleaner sections and improved product presentation.</p>
+        </div>
+        <div class="grains-mini-box">
+          <h3>Easy shopping</h3>
+          <p>Search, browse and add products with a smoother experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grains-products-section">
+      <div class="grains-section-header">
+        <div>
+          <h2>Grains Products</h2>
+          <p>Search and add your grain essentials to cart.</p>
+        </div>
+        <div class="grains-search-wrap">
+          <input type="text" id="search-input" placeholder="Search grains..." />
+        </div>
+      </div>
+      <div id="product-list" class="grains-product-list"></div>
+    </section>
+  </main>
+
+  <footer class="grains-footer">
+    <p>Fresh Grocery Delivery App</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+  <script>if(typeof fetchProducts === 'function') fetchProducts("Grains");</script>
+</body>
+</html>

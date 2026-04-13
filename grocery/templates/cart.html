@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Grocery - Cart</title>
+  <style>
+    /* Global & Topbar */
+    :root { --primary: #10b981; --bg-color: #f9fafb; --text-color: #1f2937; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-color); }
+    a { text-decoration: none; }
+    .hidden { display: none !important; }
+    .cart-topbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    .cart-brand { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+    .cart-nav-links a { margin: 0 1rem; color: var(--text-color); font-weight: 500; }
+    .cart-nav-links a.active, .cart-nav-links a:hover { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 0.25rem; }
+    .cart-logout-btn { padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; }
+
+    /* Hero */
+    .cart-hero { background: #1f2937; padding: 3rem 5%; text-align: center; color: white; }
+    .cart-chip { background: var(--primary); padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: bold; display: inline-block; margin-bottom: 1rem; }
+    .cart-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    
+    /* Layout */
+    .cart-main { padding: 3rem 5%; }
+    .cart-layout-wrap { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; }
+    .cart-items-box, .cart-summary-box { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .cart-items-box h2, .cart-summary-box h2 { margin-bottom: 1.5rem; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
+
+    /* Cart Items Rendering CSS hooks */
+    .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e5e7eb; padding: 1rem 0; }
+    .cart-item h4 { margin: 0; }
+    .cart-item button.remove-btn { background: #ef4444; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 4px; cursor: pointer; }
+
+    /* Forms */
+    .cart-form-group { margin-bottom: 1rem; }
+    .cart-form-group label { display: block; font-weight: 500; margin-bottom: 0.5rem; }
+    .cart-form-group input, .cart-form-group select, .cart-form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; }
+    .cart-place-order-btn { width: 100%; padding: 1rem; background: var(--primary); color: white; font-weight: bold; font-size: 1.1rem; border: none; border-radius: 6px; cursor: pointer; margin-top: 1rem; transition: background 0.3s; }
+    .cart-place-order-btn:hover { background: #059669; }
+
+    .cart-footer { text-align: center; padding: 2rem; background: white; border-top: 1px solid #e5e7eb; color: #6b7280; }
+
+    @media(max-width: 900px) {
+      .cart-layout-wrap { grid-template-columns: 1fr; }
+      .cart-nav-links { display: none; }
+    }
+  </style>
+</head>
+<body class="cart-page-only">
+  <header class="cart-topbar">
+    <div class="cart-brand">Fresh Grocery</div>
+    <nav class="cart-nav-links">
+      <a href="/">Home</a>
+      <a href="/fruits">Fruits</a>
+      <a href="/vegetables">Vegetables</a>
+      <a href="/dairy">Dairy</a>
+      <a href="/grains">Grains</a>
+      <a href="/cart" class="active">Cart</a>
+      <a href="/confirmation">Confirmation</a>
+    </nav>
+    <div class="cart-topbar-right">
+      <span id="welcome-text"></span>
+      <button id="logout-btn" class="cart-logout-btn hidden" type="button">Logout</button>
+    </div>
+  </header>
+
+  <section class="cart-hero">
+    <div class="cart-hero-overlay">
+      <div class="cart-hero-content">
+        <span class="cart-chip">Review • Checkout • Confirm</span>
+        <h1>Your Shopping Cart</h1>
+        <p>Review your selected items, add delivery details and place your order smoothly.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="cart-main">
+    <section class="cart-layout-wrap">
+      <div class="cart-items-box">
+        <h2>Cart Items</h2>
+        <div id="cart-items">
+          <!-- JS will populate cart items here -->
+        </div>
+      </div>
+
+      <div class="cart-summary-box">
+        <h2>Checkout Details</h2>
+        <div id="cart-summary"></div>
+
+        <form id="order-form" class="cart-order-form">
+          <div class="cart-form-group">
+            <label for="customerName">Customer Name</label>
+            <input type="text" id="customerName" required />
+          </div>
+          <div class="cart-form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" required />
+          </div>
+          <div class="cart-form-group">
+            <label for="address">Address</label>
+            <textarea id="address" required></textarea>
+          </div>
+          <div class="cart-form-group">
+            <label for="landmark">Landmark</label>
+            <input type="text" id="landmark" />
+          </div>
+          <div class="cart-form-group">
+            <label for="pincode">Pincode</label>
+            <input type="text" id="pincode" required />
+          </div>
+          <div class="cart-form-group">
+            <label for="paymentMethod">Payment Method</label>
+            <select id="paymentMethod" required>
+              <option value="">Select payment method</option>
+              <option value="COD">Cash on Delivery</option>
+              <option value="UPI">UPI</option>
+              <option value="Card">Card</option>
+            </select>
+          </div>
+          <button type="submit" class="cart-place-order-btn">Place Order</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cart-footer">
+    <p>Fresh Grocery Delivery App</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+  <script>
+    if(typeof renderCart === 'function') renderCart();
+  </script>
+</body>
+</html>

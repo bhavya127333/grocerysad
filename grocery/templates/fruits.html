@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Grocery - Fruits</title>
+  <style>
+    /* Global & Topbar */
+    :root { --primary: #10b981; --bg-color: #f9fafb; --text-color: #1f2937; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-color); }
+    a { text-decoration: none; }
+    .hidden { display: none !important; }
+    .fruits-topbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+    .fruits-brand { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+    .fruits-nav-links a { margin: 0 1rem; color: var(--text-color); font-weight: 500; }
+    .fruits-nav-links a.active, .fruits-nav-links a:hover { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 0.25rem; }
+    .fruits-logout-btn { padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; }
+
+    /* Hero */
+    .fruits-hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=1200&q=80') center/cover; padding: 4rem 5%; text-align: center; color: white; }
+    .fruits-chip { background: #f59e0b; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: bold; }
+    .fruits-hero h1 { font-size: 2.5rem; margin: 1rem 0; }
+    .fruits-hero p { max-width: 600px; margin: 0 auto; font-size: 1.1rem; line-height: 1.5; }
+
+    /* Main Sections */
+    .fruits-main { padding: 3rem 5%; }
+    .fruits-intro-card { background: white; padding: 2rem; border-radius: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .fruits-intro-left h2 { margin-bottom: 1rem; color: var(--primary); }
+    .fruits-intro-right { display: flex; gap: 1rem; }
+    .fruits-mini-box { background: var(--bg-color); padding: 1rem; border-radius: 8px; flex: 1; border-left: 4px solid var(--primary); }
+
+    /* Products Area */
+    .fruits-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .fruits-search-wrap input { padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 20px; width: 300px; outline: none; }
+    .fruits-search-wrap input:focus { border-color: var(--primary); }
+    
+    .fruits-product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+    .product-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; padding-bottom: 1rem; }
+    .product-card img { width: 100%; height: 180px; object-fit: cover; }
+    .product-card h3 { margin: 1rem 0 0.5rem; }
+    .product-card .price { color: var(--primary); font-weight: bold; font-size: 1.2rem; }
+    .product-card button { margin-top: 1rem; background: var(--primary); color: white; border: none; padding: 0.5rem 1.5rem; border-radius: 6px; cursor: pointer; transition: background 0.3s; }
+    .product-card button:hover { background: #059669; }
+
+    .fruits-footer { text-align: center; padding: 2rem; background: white; border-top: 1px solid #e5e7eb; color: #6b7280; }
+
+    @media(max-width: 768px) {
+      .fruits-intro-card { grid-template-columns: 1fr; }
+      .fruits-nav-links { display: none; }
+    }
+  </style>
+</head>
+<body class="fruits-page-only">
+  <header class="fruits-topbar">
+    <div class="fruits-brand">Fresh Grocery</div>
+    <nav class="fruits-nav-links">
+      <a href="/">Home</a>
+      <a href="/fruits" class="active">Fruits</a>
+      <a href="/vegetables">Vegetables</a>
+      <a href="/dairy">Dairy</a>
+      <a href="/grains">Grains</a>
+      <a href="/cart">Cart</a>
+      <a href="/confirmation">Confirmation</a>
+    </nav>
+    <div class="fruits-topbar-right">
+      <span id="welcome-text"></span>
+      <button id="logout-btn" class="fruits-logout-btn hidden" type="button">Logout</button>
+    </div>
+  </header>
+
+  <section class="fruits-hero">
+    <div class="fruits-hero-overlay">
+      <div class="fruits-hero-content">
+        <span class="fruits-chip">Fresh • Healthy • Natural</span>
+        <h1>Premium Fruits Collection</h1>
+        <p>Discover fresh fruits with a modern and professional shopping experience. Browse products, search quickly, and add your favorites to cart.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="fruits-main">
+    <section class="fruits-intro-card">
+      <div class="fruits-intro-left">
+        <h2>Fresh Fruits for Everyday Nutrition</h2>
+        <p>Explore quality fruit options arranged in a cleaner layout with better spacing, a focused search, and premium product cards.</p>
+      </div>
+      <div class="fruits-intro-right">
+        <div class="fruits-mini-box">
+          <h3>Better browsing</h3>
+          <p>Focused category page with less clutter and easier actions.</p>
+        </div>
+        <div class="fruits-mini-box">
+          <h3>Neat product view</h3>
+          <p>Balanced cards, better spacing and a cleaner visual hierarchy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fruits-products-section">
+      <div class="fruits-section-header">
+        <div>
+          <h2>Fruits Products</h2>
+          <p>Search and add your favorite fruits to cart.</p>
+        </div>
+        <div class="fruits-search-wrap">
+          <input type="text" id="search-input" placeholder="Search fruits..." />
+        </div>
+      </div>
+      <div id="product-list" class="fruits-product-list">
+        <!-- JS injects products here -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="fruits-footer">
+    <p>Fresh Grocery Delivery App</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+  <script>
+    if(typeof fetchProducts === 'function') fetchProducts("Fruits");
+  </script>
+</body>
+</html>
